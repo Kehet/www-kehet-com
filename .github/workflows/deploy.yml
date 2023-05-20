@@ -1,0 +1,36 @@
+name: 'Deploy'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run deploy script
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          script: /var/www/deploy.sh
+          envs: DEPLOY_REPOSITORY,DEPLOY_PATH,DEPLOY_HEALTH_CHECK
+        env:
+          DEPLOY_REPOSITORY: ${{ secrets.DEPLOY_REPOSITORY }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_HEALTH_CHECK: ${{ secrets.DEPLOY_HEALTH_CHECK }}
