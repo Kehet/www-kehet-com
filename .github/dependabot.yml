@@ -7,9 +7,18 @@ version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
+    target-branch: "develop"
     schedule:
       interval: "weekly"
+      day: "friday"
+    labels:
+      - npm
+      - dependencies
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: "develop"
     schedule:
       interval: "weekly"
+      day: "friday"
+    labels:
+      - github_actions
