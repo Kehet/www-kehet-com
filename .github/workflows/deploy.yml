@@ -40,7 +40,7 @@ jobs:
 
           EOF="$(dd if=/dev/urandom bs=15 count=1 status=none | base64)"
           echo "CHANGELOG<<${EOF}" >> "${GITHUB_OUTPUT}"
-          echo "$(git log  --pretty=format:"* %b" --merges ${LATEST_TAG}..HEAD)" >> "${GITHUB_OUTPUT}"
+          echo "$(git log  --pretty=format:"* %s" --no-merges ${LATEST_TAG}..HEAD)" >> "${GITHUB_OUTPUT}"
           echo "${EOF}" >> "${GITHUB_OUTPUT}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
