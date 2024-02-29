@@ -4,7 +4,19 @@
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
+
 updates:
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    target-branch: "develop"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+    labels:
+      - docker
+      - dependencies
+
   - package-ecosystem: "npm"
     directory: "/"
     target-branch: "develop"
@@ -14,6 +26,7 @@ updates:
     labels:
       - npm
       - dependencies
+
   - package-ecosystem: "github-actions"
     directory: "/"
     target-branch: "develop"
