@@ -49,13 +49,13 @@ body {
     right: 0;
     z-index: 10;
     background-image: linear-gradient(to right,
-        /*RED*/ var(--color1) 0%, var(--color1) 18%,
-        /*ORANGE*/ var(--color9) 18%, var(--color9) 33%,
-        /*YELLOW*/ var(--color3) 33%, var(--color3) 50%,
-        /*GREEN*/ var(--color2) 50%, var(--color2) 66%,
-        /*CYAN*/ var(--color6) 50%, var(--color6) 66%,
-        /*BLUE*/ var(--color4) 66%, var(--color4) 83%,
-        /*PURPLE*/ var(--color5) 83%, var(--color5) 100%);
+        /*RED*/ var(--color1) 0%, var(--color1) 14%,
+        /*ORANGE*/ var(--color9) 14%, var(--color9) 28%,
+        /*YELLOW*/ var(--color3) 28%, var(--color3) 42%,
+        /*GREEN*/ var(--color2) 42%, var(--color2) 56%,
+        /*CYAN*/ var(--color6) 56%, var(--color6) 70%,
+        /*BLUE*/ var(--color4) 70%, var(--color4) 84%,
+        /*PURPLE*/ var(--color5) 84%, var(--color5) 100%);
 }
 
 .container {
