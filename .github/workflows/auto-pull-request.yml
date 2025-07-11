@@ -1,14 +1,11 @@
 name: Auto pull request
 
-# https://github.com/marketplace/actions/create-pull-request
-# https://github.com/peter-evans/create-pull-request/blob/master/docs/examples.md#keep-a-branch-up-to-date-with-another
-# https://github.com/marketplace/actions/auto-pull-request-creator
-
 on:
   push:
     branches:
       - release-candidate
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   pull-requests: write
@@ -16,44 +13,4 @@ permissions:
 
 jobs:
   autopull:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: master
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Reset release-candidate branch on runner
-        run: |
-          git fetch origin release-candidate:release-candidate
-          git reset --hard release-candidate
-
-      - name: Build Changelog since the latest tag
-        id: build_changelog
-        run: |
-          LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-          echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
-
-          EOF="$(dd if=/dev/urandom bs=15 count=1 status=none | base64)"
-          echo "CHANGELOG<<${EOF}" >> "${GITHUB_OUTPUT}"
-          echo "$(git log  --pretty=format:"* %b" --no-merges ${LATEST_TAG}..HEAD)" >> "${GITHUB_OUTPUT}"
-          echo "${EOF}" >> "${GITHUB_OUTPUT}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Choose and set PR title
-        id: title
-        run: |
-          DATE=$(date +%Y-%m-%d)
-          SEPERATOR="-"
-          for LETTER in {a..z}; do if [[ "$DATE$SEPARATOR$LETTER" > "${{ steps.build_changelog.outputs.latest_tag }}" ]]; then echo "pr_title=$DATE$SEPARATOR$LETTER" >> $GITHUB_OUTPUT && break; fi; done
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: release-candidate
-          title: Release ${{ steps.title.outputs.pr_title }}
-          body: ${{ steps.build_changelog.outputs.changelog }}
+    uses: Kehet/shared-github-workflows/.github/workflows/auto-pull-request.yml@master

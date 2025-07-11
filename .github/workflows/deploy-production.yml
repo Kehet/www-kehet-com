@@ -1,8 +1,10 @@
 name: Production Deployment
+
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -11,69 +13,9 @@ concurrency: production_environment
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: master
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-
-      - name: Install deployer
-        run: composer require --dev deployer/deployer
-
-      - name: Deploy
-        uses: deployphp/action@v1
-        with:
-          dep: deploy
-          private-key: ${{ secrets.PRIVATE_KEY }}
-
-      - name: Reset release-candidate branch on runner
-        run: |
-          git fetch origin release-candidate:release-candidate
-          git reset --hard release-candidate
-
-      - name: Build Changelog since the latest tag
-        id: build_changelog
-        run: |
-          LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-          echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
-
-          EOF="$(dd if=/dev/urandom bs=15 count=1 status=none | base64)"
-          echo "CHANGELOG<<${EOF}" >> "${GITHUB_OUTPUT}"
-          echo "$(git log  --pretty=format:"* %b" --no-merges ${LATEST_TAG}..HEAD)" >> "${GITHUB_OUTPUT}"
-          echo "${EOF}" >> "${GITHUB_OUTPUT}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Choose and set PR title
-        id: title
-        run: |
-          DATE=$(date +%Y-%m-%d)
-          SEPERATOR="-"
-          for LETTER in {a..z}; do if [[ "$DATE$SEPARATOR$LETTER" > "${{ steps.build_changelog.outputs.latest_tag }}" ]]; then echo "pr_title=$DATE$SEPARATOR$LETTER" >> $GITHUB_OUTPUT && break; fi; done
-
-      - name: Create a GitHub release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.title.outputs.pr_title }}
-          release_name: Release ${{ steps.title.outputs.pr_title }}
-          body: |
-            ${{ steps.build_changelog.outputs.changelog }}
-
-      - name: Update release-candidate
-        run: |
-          git checkout master
-          git fetch origin
-          git checkout release-candidate
-          git pull origin release-candidate
-          git rebase origin/master
-          git push origin release-candidate --force-with-lease
+    if: github.ref == 'refs/heads/master'
+    uses: Kehet/shared-github-workflows/.github/workflows/deployphp-deployment.yml@master
+    with:
+      php-version: '8.3'
+    secrets:
+      private-key: ${{ secrets.PRIVATE_KEY }}
