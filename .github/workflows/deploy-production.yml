@@ -14,7 +14,7 @@ concurrency: production_environment
 jobs:
   deploy:
     if: github.ref == 'refs/heads/master'
-    uses: Kehet/shared-github-workflows/.github/workflows/deployphp-deployment.yml@master
+    uses: Kehet/shared-github-workflows/.github/workflows/deployer-deployment.yml@master
     with:
       php-version: '8.3'
     secrets:
