@@ -12,8 +12,13 @@ permissions:
 concurrency: production_environment
 
 jobs:
+  run-tests:
+    if: github.ref == 'refs/heads/master'
+    uses: ./.github/workflows/js-tests.yml
+
   deploy:
     if: github.ref == 'refs/heads/master'
+    needs: run-tests
     uses: Kehet/shared-github-workflows/.github/workflows/deployer-deployment.yml@master
     with:
       php-version: '8.3'
