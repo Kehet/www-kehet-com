@@ -6,6 +6,10 @@ on:
       - release-candidate
   workflow_dispatch:
   workflow_call:
+  workflow_run:
+    workflows: ["Dependabot auto merge"]
+    types:
+      - completed
 
 permissions:
   pull-requests: write
