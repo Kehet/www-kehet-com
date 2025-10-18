@@ -4,6 +4,10 @@ on:
   push:
   workflow_dispatch:
   workflow_call:
+  workflow_run:
+    workflows: ["Auto pull request"]
+    types:
+      - completed
 
 permissions:
   contents: read
