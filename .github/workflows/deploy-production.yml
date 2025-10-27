@@ -8,8 +8,12 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
-concurrency: production_environment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   run-tests:
@@ -19,8 +23,32 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/master'
     needs: run-tests
-    uses: Kehet/shared-github-workflows/.github/workflows/deployer-deployment.yml@master
-    with:
-      php-version: '8.3'
-    secrets:
-      private-key: ${{ secrets.PRIVATE_KEY }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist/'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
