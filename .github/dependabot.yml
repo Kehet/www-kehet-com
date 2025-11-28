@@ -13,25 +13,15 @@ updates:
     schedule:
       interval: "weekly"
       day: "friday"
-    labels:
-      - docker
-      - dependencies
-
   - package-ecosystem: "npm"
     directory: "/"
     target-branch: "release-candidate"
     schedule:
       interval: "weekly"
       day: "friday"
-    labels:
-      - npm
-      - dependencies
-
   - package-ecosystem: "github-actions"
     directory: "/"
     target-branch: "release-candidate"
     schedule:
       interval: "weekly"
       day: "friday"
-    labels:
-      - github_actions
