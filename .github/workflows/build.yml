@@ -1,0 +1,117 @@
+name: build
+
+on:
+  release:
+    types: [ published ]
+
+permissions: { }
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          persist-credentials: false
+
+      # Node
+
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: '24'
+
+      - name: Set cache key
+        id: set-cache-key
+        run: echo "CACHE_KEY=${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}" >> $GITHUB_OUTPUT
+
+      - name: Restore node_modules cache (if available)
+        id: node-modules-restore
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: node_modules/
+          key: ${{ steps.set-cache-key.outputs.CACHE_KEY }}
+
+      - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
+        name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Build node project
+        run: |
+          npm run build
+
+      - if: ${{ steps.node-modules-restore.outputs.cache-hit != 'true' }}
+        name: Upload node_modules cache
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: node_modules/
+          key: ${{ steps.set-cache-key.outputs.CACHE_KEY }}
+
+      # Docker
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4.4.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=sha
+            type=raw,value=latest
+
+      - name: Build and push
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
+        with:
+          context: .
+          target: prod
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Deploy
+
+      - name: Trigger deploy
+        env:
+          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+          COMMIT_SHA: ${{ github.sha }}
+          PUSHER: ${{ github.event.release.author.login }}
+          BRANCH: ${{ github.event.release.target_commitish }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_NOTES: ${{ github.event.release.body }}
+        run: |
+          BODY=$(jq -n \
+            --arg sha "$COMMIT_SHA" \
+            --arg pusher "$PUSHER" \
+            --arg branch "$BRANCH" \
+            --arg repository "$REPOSITORY" \
+            --arg run_url "$RUN_URL" \
+            --arg release_tag "$RELEASE_TAG" \
+            --arg release_notes "$RELEASE_NOTES" \
+            '{sha: $sha, pusher: $pusher, branch: $branch, repository: $repository, run_url: $run_url, release_tag: $release_tag, release_notes: $release_notes}')
+          SIG=$(printf '%s' "$BODY" | openssl dgst -sha256 -hmac "$WEBHOOK_SECRET" | sed 's/^.* /sha256=/')
+          HTTP_STATUS=$(curl -s -o response.txt -w "%{http_code}" -X POST "https://hooks.kehet.com/hooks/deploy?project=www-kehet-com" \
+            -H "X-Hub-Signature-256: $SIG" -H "Content-Type: application/json" -d "$BODY")
+          echo "HTTP status: $HTTP_STATUS"
+          cat response.txt
+          if [ "$HTTP_STATUS" -lt 200 ] || [ "$HTTP_STATUS" -ge 300 ]; then
+            exit 1
+          fi
