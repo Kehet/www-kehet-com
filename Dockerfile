@@ -4,7 +4,7 @@
 
 # Non-root nginx image, fronted by Traefik (which terminates TLS).
 # https://github.com/nginx/docker-nginx-unprivileged
-FROM nginxinc/nginx-unprivileged:1.30-alpine@sha256:dcea25a6593307a74b09e59a47f8695c4d56943750e45add532ae0bf8b24bfd6 AS base
+FROM nginxinc/nginx-unprivileged:1.31-alpine@sha256:a718212f9cf21e241f14067333000a3f0930292f5354fe0db269e9a2a2596b9e AS base
 
 ############################################
 # Production Image
