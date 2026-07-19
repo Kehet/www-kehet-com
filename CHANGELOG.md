@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.3](https://github.com/Kehet/www-kehet-com/compare/v0.1.2...v0.1.3) (2026-07-19)
+
+
+### Dependencies
+
+* **deps:** update dependency vite to v8.1.5 ([#237](https://github.com/Kehet/www-kehet-com/issues/237)) ([6221ea8](https://github.com/Kehet/www-kehet-com/commit/6221ea80ae644ffb2fb89ef2c630ecb30b3e7005))
+* **deps:** update nginxinc/nginx-unprivileged docker tag to v1.31 ([#238](https://github.com/Kehet/www-kehet-com/issues/238)) ([7fc8bd1](https://github.com/Kehet/www-kehet-com/commit/7fc8bd1916b23096ac1781867fcec065623b9980))
+
 ## [0.1.2](https://github.com/Kehet/www-kehet-com/compare/v0.1.1...v0.1.2) (2026-07-18)
 
 
