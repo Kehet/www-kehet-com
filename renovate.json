@@ -9,5 +9,6 @@
   "minimumReleaseAge": "3 days",
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
-  "semanticCommitScope": "deps"
+  "semanticCommitScope": "deps",
+  "pinDigests": true
 }
