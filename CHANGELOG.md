@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/Kehet/www-kehet-com/compare/v0.1.3...v0.1.4) (2026-07-20)
+
+
+### Dependencies
+
+* **deps:** enable Renovate digest pinning for the base image ([#240](https://github.com/Kehet/www-kehet-com/issues/240)) ([0025c3e](https://github.com/Kehet/www-kehet-com/commit/0025c3e71f1a12fe15cc428d463bf0f259769f08))
+
 ## [0.1.3](https://github.com/Kehet/www-kehet-com/compare/v0.1.2...v0.1.3) (2026-07-19)
 
 
