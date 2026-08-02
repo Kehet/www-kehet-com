@@ -10,5 +10,12 @@
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
   "semanticCommitScope": "deps",
-  "pinDigests": true
+  "pinDigests": true,
+  "packageRules": [
+    {
+      "description": "Digest updates have no release timestamp, so minimumReleaseAge can never be satisfied and renovate/stability-days stays pending forever.",
+      "matchUpdateTypes": ["digest", "pinDigest"],
+      "minimumReleaseAge": null
+    }
+  ]
 }
