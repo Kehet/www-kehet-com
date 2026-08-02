@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.6](https://github.com/Kehet/www-kehet-com/compare/v0.1.5...v0.1.6) (2026-08-02)
+
+
+### Dependencies
+
+* **deps:** update actions/checkout digest to 3d3c42e ([#242](https://github.com/Kehet/www-kehet-com/issues/242)) ([f509764](https://github.com/Kehet/www-kehet-com/commit/f50976433a4fa0b111cfb5c10615d75c37f675ba))
+* **deps:** update nginxinc/nginx-unprivileged:1.31-alpine docker digest to 59ccf09 ([#243](https://github.com/Kehet/www-kehet-com/issues/243)) ([573bd89](https://github.com/Kehet/www-kehet-com/commit/573bd89015eecb9af4cb895384c103255abb650c))
+
 ## [0.1.5](https://github.com/Kehet/www-kehet-com/compare/v0.1.4...v0.1.5) (2026-08-02)
 
 
