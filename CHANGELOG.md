@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.5](https://github.com/Kehet/www-kehet-com/compare/v0.1.4...v0.1.5) (2026-08-02)
+
+
+### Dependencies
+
+* **deps:** update dependency vite to v8.2.0 ([#247](https://github.com/Kehet/www-kehet-com/issues/247)) ([078e0f5](https://github.com/Kehet/www-kehet-com/commit/078e0f5ab4b6d34368f2b8c2fad13f54d9596d2b))
+* **deps:** update docker/login-action action to v4.5.1 ([#244](https://github.com/Kehet/www-kehet-com/issues/244)) ([d49ad3c](https://github.com/Kehet/www-kehet-com/commit/d49ad3c0920c2ef112f88fe6a08afa93e34a09dd))
+* **deps:** update docker/login-action action to v4.6.0 ([#246](https://github.com/Kehet/www-kehet-com/issues/246)) ([b73fe75](https://github.com/Kehet/www-kehet-com/commit/b73fe7573279191929b95b8c400e35a79318f7cb))
+
 ## [0.1.4](https://github.com/Kehet/www-kehet-com/compare/v0.1.3...v0.1.4) (2026-07-20)
 
 
