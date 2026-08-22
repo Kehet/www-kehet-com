@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.9](https://github.com/Kehet/www-kehet-com/compare/v0.1.8...v0.1.9) (2026-08-22)
+
+
+### Dependencies
+
+* **deps:** update docker/setup-buildx-action action to v4.3.0 ([#256](https://github.com/Kehet/www-kehet-com/issues/256)) ([20f73b2](https://github.com/Kehet/www-kehet-com/commit/20f73b2a1d70794985977bf07ecaa26ba8876fd5))
+* **deps:** update nginxinc/nginx-unprivileged:1.31-alpine docker digest to c3fed64 ([#255](https://github.com/Kehet/www-kehet-com/issues/255)) ([5c746fb](https://github.com/Kehet/www-kehet-com/commit/5c746fb4e8bb72a73349fdd807d09becea166161))
+
 ## [0.1.8](https://github.com/Kehet/www-kehet-com/compare/v0.1.7...v0.1.8) (2026-08-16)
 
 
