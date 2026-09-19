@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.15](https://github.com/Kehet/www-kehet-com/compare/v0.1.14...v0.1.15) (2026-09-19)
+
+
+### Dependencies
+
+* **deps:** update docker/build-push-action action to v7.4.0 ([#269](https://github.com/Kehet/www-kehet-com/issues/269)) ([44aa677](https://github.com/Kehet/www-kehet-com/commit/44aa67749b10e62f50e8efe2c6168d82277529b9))
+* **deps:** update docker/setup-buildx-action action to v4.4.0 ([#270](https://github.com/Kehet/www-kehet-com/issues/270)) ([c959b60](https://github.com/Kehet/www-kehet-com/commit/c959b60e93dfc3a17625d44c10e2c45b9f336f4a))
+* **deps:** update nginxinc/nginx-unprivileged:1.31-alpine docker digest to b54ac35 ([#268](https://github.com/Kehet/www-kehet-com/issues/268)) ([3044a82](https://github.com/Kehet/www-kehet-com/commit/3044a82aaf3621940323b166221dc76beae69573))
+
 ## [0.1.14](https://github.com/Kehet/www-kehet-com/compare/v0.1.13...v0.1.14) (2026-09-16)
 
 
