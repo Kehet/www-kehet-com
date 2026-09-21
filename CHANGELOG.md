@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.16](https://github.com/Kehet/www-kehet-com/compare/v0.1.15...v0.1.16) (2026-09-21)
+
+
+### Dependencies
+
+* **deps:** update docker/setup-buildx-action action to v4.4.1 ([#272](https://github.com/Kehet/www-kehet-com/issues/272)) ([0c02e5b](https://github.com/Kehet/www-kehet-com/commit/0c02e5b50592f985f7f264cadcd2fb04de57d308))
+
 ## [0.1.15](https://github.com/Kehet/www-kehet-com/compare/v0.1.14...v0.1.15) (2026-09-19)
 
 
