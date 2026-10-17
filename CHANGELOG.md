@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.22](https://github.com/Kehet/www-kehet-com/compare/v0.1.21...v0.1.22) (2026-10-17)
+
+
+### Dependencies
+
+* **deps:** update actions/create-github-app-token action to v3.3.0 ([#288](https://github.com/Kehet/www-kehet-com/issues/288)) ([48ea4a1](https://github.com/Kehet/www-kehet-com/commit/48ea4a10c163117d0a4c8b0046bc854abb590e74))
+* **deps:** update nginxinc/nginx-unprivileged:1.31-alpine docker digest to 378d0c3 ([#287](https://github.com/Kehet/www-kehet-com/issues/287)) ([ec7aeb5](https://github.com/Kehet/www-kehet-com/commit/ec7aeb54d4fbcfad6a09cf5cee0ead68ce147de6))
+
 ## [0.1.21](https://github.com/Kehet/www-kehet-com/compare/v0.1.20...v0.1.21) (2026-10-12)
 
 
