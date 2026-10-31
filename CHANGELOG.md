@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.24](https://github.com/Kehet/www-kehet-com/compare/v0.1.23...v0.1.24) (2026-10-31)
+
+
+### Dependencies
+
+* **deps:** update docker/login-action action to v4.7.0 ([#293](https://github.com/Kehet/www-kehet-com/issues/293)) ([aa70028](https://github.com/Kehet/www-kehet-com/commit/aa70028690e340a1ceccd68bda8d22221855f2ff))
+
 ## [0.1.23](https://github.com/Kehet/www-kehet-com/compare/v0.1.22...v0.1.23) (2026-10-25)
 
 
