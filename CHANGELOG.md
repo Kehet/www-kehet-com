@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.25](https://github.com/Kehet/www-kehet-com/compare/v0.1.24...v0.1.25) (2026-11-14)
+
+
+### Dependencies
+
+* **deps:** update amannn/action-semantic-pull-request action to v6.1.2 ([#295](https://github.com/Kehet/www-kehet-com/issues/295)) ([b8abb6e](https://github.com/Kehet/www-kehet-com/commit/b8abb6edc8deb2ed13bce0dc9a8eea3680df2747))
+* **deps:** update dependency vite to v8.3.6 ([#296](https://github.com/Kehet/www-kehet-com/issues/296)) ([e80fe6d](https://github.com/Kehet/www-kehet-com/commit/e80fe6df49ab8acff25fe9d9aa04f7f4f27357b8))
+* **deps:** update dependency vite to v8.3.8 ([#299](https://github.com/Kehet/www-kehet-com/issues/299)) ([f53eaab](https://github.com/Kehet/www-kehet-com/commit/f53eaabf61c59152cd6055eadc8d8469c1c8d195))
+* **deps:** update docker/login-action action to v4.8.0 ([#297](https://github.com/Kehet/www-kehet-com/issues/297)) ([2c9f9a5](https://github.com/Kehet/www-kehet-com/commit/2c9f9a5b7fc8fc0048bdbb76033287e3388bedbf))
+
 ## [0.1.24](https://github.com/Kehet/www-kehet-com/compare/v0.1.23...v0.1.24) (2026-10-31)
 
 
