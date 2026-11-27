@@ -1,0 +1,38 @@
+name: pr-build
+
+# Builds the site and the image and checks nginx serves it, so Renovate's
+# automerge has a check that exercises dependency changes.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Build the image
+        run: docker build --tag www-kehet-com:pr .
+
+      - name: Smoke test
+        run: |
+          set -euo pipefail
+          docker run --detach --rm --name site --publish 8080:8080 www-kehet-com:pr
+          trap 'docker stop site > /dev/null' EXIT
+          curl -fsS --retry 10 --retry-delay 1 --retry-all-errors -o /dev/null http://localhost:8080/

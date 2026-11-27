@@ -1,21 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "timezone": "Europe/Helsinki",
-  "schedule": ["every weekend"],
-  "prHourlyLimit": 0,
-  "prConcurrentLimit": 10,
-  "labels": ["dependencies"],
-  "minimumReleaseAge": "3 days",
-  "semanticCommits": "enabled",
-  "semanticCommitType": "chore",
-  "semanticCommitScope": "deps",
-  "pinDigests": true,
-  "packageRules": [
-    {
-      "description": "Digest updates have no release timestamp, so minimumReleaseAge can never be satisfied and renovate/stability-days stays pending forever.",
-      "matchUpdateTypes": ["digest", "pinDigest"],
-      "minimumReleaseAge": null
-    }
+  "extends": [
+    "github>Kehet/renovate-config"
   ]
 }
