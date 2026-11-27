@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.27](https://github.com/Kehet/www-kehet-com/compare/v0.1.26...v0.1.27) (2026-11-27)
+
+
+### Bug Fixes
+
+* **deps:** update amannn/action-semantic-pull-request action to v6.1.4 ([#305](https://github.com/Kehet/www-kehet-com/issues/305)) ([e60edbe](https://github.com/Kehet/www-kehet-com/commit/e60edbe534a575cf59f26877d1df0f38ab949080))
+
 ## [0.1.26](https://github.com/Kehet/www-kehet-com/compare/v0.1.25...v0.1.26) (2026-11-21)
 
 
